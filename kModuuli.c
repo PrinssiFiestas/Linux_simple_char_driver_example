@@ -60,8 +60,9 @@ __init int kModuleInit(void)
 	return 0;
 }
 
-void kModuleExit(void)
+__exit void kModuleExit(void)
 {
+	unregister_chrdev(MAJOR_NUM,"Meitsin ajuri");
 	printk(KERN_ALERT "Suksittiin munaan. T‰‰ funktio on %s\n", __func__);
 }
 

@@ -13,6 +13,10 @@ Include following libraries:
 Add license to access some important kernel functionality
 MODULE_LICENSE("GPL");
 
+Optionally add author and description
+MODULE_AUTHOR("Meitsi");
+MODULE_DESCRIPTION("Meitsin ajuri lol");
+
 //-------------------------------------
 
 Write initialization function "__init int alusta(void)"
@@ -20,8 +24,9 @@ Write initialization function "__init int alusta(void)"
 -"__init" can also be used for any function that's only required during initialization
 -"__initdata"-keyword can be used to free the ram of global variables after initialization
 
-Call register_chrdev(int id, const char[] name, struct file_operations fOp) inside alusta().
--id is the major number of the device
+Call register_chrdev(int major_num, const char[] name, struct file_operations fOp) inside alusta().
+-register_chrdev() returns 0 on success, <0 on error, >0 when major number is taken. 
+-Probably a good idea to write error handling
 
 Initialize struct file_operations fOp obviously before alusta() with at least following values
 struct file_operations fOp = {
@@ -43,7 +48,9 @@ module_init(alusta);
 
 //---------------------------------------
 
-Write exit function "void poista(void)"
+Write exit function "__exit void poista(void)"
+
+Call "unregister_chrdev(int major_num, const char[] name)" inside poista();
 
 Give the written function as an argument for following macro function:
 module_exit(poista);
