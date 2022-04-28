@@ -50,7 +50,7 @@ int exportteri(void);
 __init int kModuleInit(void)
 {
 	int i;
-	printk(KERN_ALERT "Kern‰‰lin sis‰l jee. T‰‰ funktio siis %s\n", __func__);
+	printk(KERN_ALERT "Kern√§√§lin sis√§l jee. T√§√§ funktio siis %s\n", __func__);
 	exportteri();
 	for(i=0; i<shidii; i++) printk(KERN_ALERT "shidii");
 
@@ -63,7 +63,7 @@ __init int kModuleInit(void)
 __exit void kModuleExit(void)
 {
 	unregister_chrdev(MAJOR_NUM,"Meitsin ajuri");
-	printk(KERN_ALERT "Suksittiin munaan. T‰‰ funktio on %s\n", __func__);
+	printk(KERN_ALERT "L√§hettiin menee. T√§√§ funktio on %s\n", __func__);
 }
 
 module_init(kModuleInit);
